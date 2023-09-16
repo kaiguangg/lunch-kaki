@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { RoomService } from '../room.service';
+import { CreateRoom } from '../room.model';
 
 @Component({
   selector: 'app-create-room',
@@ -12,7 +14,7 @@ export class CreateRoomComponent {
   newItem: string = '';
   items: string[] = [];
   
-  constructor(private router: Router) { }
+  constructor(private router: Router, private roomService: RoomService) { }
   
   addItem() {
     if (this.newItem) {
@@ -41,8 +43,22 @@ export class CreateRoomComponent {
   }
 
   submit() {
-    this.close.emit();
-    this.router.navigate(['/room/1']);
+    // const payload = this.items;
+
+    const payload: CreateRoom = {
+      restaurants: this.items
+    };
+    
+    this.roomService.postRestaurants(payload).subscribe(res => {
+      console.log('Server Response: ', res.body);
+      this.close.emit();
+      this.router.navigate(['/room/1'], { state: { roomId: '1234' } });
+    }, error => {
+      console.error('Server Error: ', error);
+    });
+    
+    // this.router.navigate(['/room/1']);
+    // this.router.navigate(['/some-route'], { state: { roomId: '1234' } });
   }
 
   closeDialog() {

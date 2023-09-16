@@ -11,54 +11,83 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class RestaurantService {
 
-    @Autowired
-    private RestaurantRepository restaurantRepository;
+  @Autowired
+  private RestaurantRepository restaurantRepository;
 
-    @Autowired
-    private RoomPinRepository roomPinRepository;
+  @Autowired
+  private RoomPinRepository roomPinRepository;
 
-    public ResponseEntity<Object> getAllRestaurants(Integer roomId) {
+  public ResponseEntity<Object> getAllRestaurants(Integer roomId) {
 
-        Optional<RoomPin> roomPin = roomPinRepository.findById(roomId);
+    Optional<RoomPin> roomPin = roomPinRepository.findById(roomId);
 
-        if (roomPin.isEmpty() || !roomPin.isPresent()) {
-            return new ResponseEntity<>("Room PIN is invalid.", HttpStatus.BAD_REQUEST);
-        }
-
-        Optional<Restaurants> restaurantsList = restaurantRepository.findById(roomId);
-        if (restaurantsList.isEmpty() || !restaurantsList.isPresent()) {
-            return new ResponseEntity<>("Room PIN is invalid.", HttpStatus.BAD_REQUEST);
-        }
-
-        return new ResponseEntity<>(restaurantsList, HttpStatus.OK);
+    if (roomPin.isEmpty() || !roomPin.isPresent()) {
+      return new ResponseEntity<>("Room PIN is invalid.", HttpStatus.BAD_REQUEST);
     }
 
-    public ResponseEntity<String> saveRestaurant(RestaurantsDTO restaurantsDTO) {
-        if (restaurantsDTO.getRestaurants().isEmpty()) {
-            return new ResponseEntity<>("Restaurant name is empty.", HttpStatus.BAD_REQUEST);
-        }
-
-        Integer roomPin = roomPinRepository.getNextRoomId();
-        List<Restaurants> restaurantsList = new ArrayList<>();
-
-        for (String name : restaurantsDTO.getRestaurants()) {
-            Restaurants restaurant = new Restaurants();
-            restaurant.setRoomId(roomPin);
-            restaurant.setName(name);
-            restaurant.setCreatedDate(LocalDateTime.now());
-
-            restaurantsList.add(restaurant);
-        }
-
-        restaurantRepository.saveAll(restaurantsList);
-
-        return new ResponseEntity<>("Room has created.", HttpStatus.CREATED);
+    Optional<Restaurants> restaurantsList = restaurantRepository.findById(roomId);
+    if (restaurantsList.isEmpty() || !restaurantsList.isPresent()) {
+      return new ResponseEntity<>("Room PIN is invalid.", HttpStatus.BAD_REQUEST);
     }
+
+    return new ResponseEntity<>(restaurantsList, HttpStatus.OK);
+  }
+
+  public ResponseEntity<Object> saveRestaurant(RestaurantsDTO restaurantsDTO) {
+    if (restaurantsDTO.getRestaurants().isEmpty()) {
+      return new ResponseEntity<>("Restaurant name is empty.", HttpStatus.BAD_REQUEST);
+    }
+
+    RoomPin roomPin = new RoomPin();
+
+    roomPin.setCreatedDate(LocalDateTime.now());
+    roomPinRepository.saveAndFlush(roomPin);
+
+    List<Restaurants> restaurantsList = new ArrayList<>();
+
+    for (String name : restaurantsDTO.getRestaurants()) {
+      Restaurants restaurant = new Restaurants();
+      restaurant.setRoomId(roomPin.getId());
+      restaurant.setName(name);
+      restaurant.setCreatedDate(LocalDateTime.now());
+
+      restaurantsList.add(restaurant);
+    }
+
+    restaurantRepository.saveAll(restaurantsList);
+
+    return new ResponseEntity<>(roomPin, HttpStatus.CREATED);
+  }
+
+  public ResponseEntity<String> getRandomRestaurant(Integer roomId) {
+    if (Objects.isNull(roomId)) {
+      return new ResponseEntity<>("Room PIN is empty.", HttpStatus.BAD_REQUEST);
+    }
+
+    Optional<RoomPin> roomPin = roomPinRepository.findById(roomId);
+    if (roomPin.isEmpty() || !roomPin.isPresent()) {
+      return new ResponseEntity<>("Room PIN is invalid.", HttpStatus.BAD_REQUEST);
+    }
+
+    List<Restaurants> restaurantsList = restaurantRepository.getAllRestaurants(roomId);
+    if (Objects.isNull(restaurantsList)) {
+      return new ResponseEntity<>("Please create a new room.", HttpStatus.BAD_REQUEST);
+    }
+
+    // Create a Random object
+    Random rand = new Random();
+
+    // Generate a random index between 0 and the size of the list
+    int randomIndex = rand.nextInt(restaurantsList.size());
+
+    // Get the element at the random index
+    String randomRestaurant = restaurantsList.get(randomIndex).getName();
+
+    return new ResponseEntity<>(randomRestaurant, HttpStatus.OK);
+  }
 }

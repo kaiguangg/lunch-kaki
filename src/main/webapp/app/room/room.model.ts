@@ -1,4 +1,8 @@
-export interface City {
-    name: string,
-    code: string
+export interface Restaurants {
+    roomId: number,
+    name?: string[],
+}
+
+export interface CreateRoom {
+    restaurants?: string[]
 }

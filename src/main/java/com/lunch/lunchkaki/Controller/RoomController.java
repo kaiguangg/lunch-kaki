@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api")
 public class RoomController {
     @Autowired
@@ -20,10 +21,14 @@ public class RoomController {
     }
 
     @PostMapping(value = "/room")
-    public ResponseEntity<String> createRoom(@RequestBody RestaurantsDTO restaurantsDTO) {
-//        Restaurants savedRestaurants = restaurantService.saveRestaurant(restaurantsDTO);
+    public ResponseEntity<Object> createRoom(@RequestBody RestaurantsDTO restaurantsDTO) {
         return restaurantService.saveRestaurant(restaurantsDTO);
     }
+
+  @GetMapping(value = "/random-restaurant/{roomId}")
+  public ResponseEntity<String> getRandomRestaurant(@PathVariable Integer roomId) {
+    return restaurantService.getRandomRestaurant(roomId);
+  }
 
 }
 

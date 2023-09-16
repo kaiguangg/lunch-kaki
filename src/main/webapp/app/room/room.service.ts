@@ -1,17 +1,26 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CreateRoom } from './room.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RoomService {
-  private getRandomRestaurantAPI = 'http://localhost:8080/';
+  private roomAPI = 'http://localhost:8080/api/room';
+  private getRandomRestaurantAPI = 'http://localhost:8080/api/random-restaurant';
 
-  constructor(private http: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
-  getRandomRestaurant(): Observable<any> {
-    // Assuming the API endpoint for getting a random restaurants is 'random-restaurants'
-    return this.http.get<any>(`${this.getRandomRestaurantAPI}random-restaurants`);
+  getRandomRestaurant(roomId: string): Observable<any> {
+    return this.httpClient.get(this.getRandomRestaurantAPI, { observe:'response', responseType:'text' });
+  }
+
+  getAllRestaurants(roomId: string): Observable<any> {
+    return this.httpClient.get(this.roomAPI, { observe:'response', responseType:'text' });
+  }
+
+  postRestaurants(restaurants: CreateRoom): Observable<any> {
+    return this.httpClient.post(this.roomAPI, restaurants);
   }
 }

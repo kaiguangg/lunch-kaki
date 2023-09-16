@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { City } from './room.model';
+import { Restaurants } from './room.model';
 import { AlertComponent } from 'ngx-bootstrap/alert';
 import { Router } from '@angular/router';
 import { RoomService } from './room.service';
@@ -11,7 +11,7 @@ import { RoomService } from './room.service';
   styleUrls: ['./room.component.css'],
 })
 export class RoomComponent implements OnInit {
-  cities!: City[];
+  restaurants!: Restaurants[];
   alerts: any[] = [{}];
   formGroup!: FormGroup;
 
@@ -21,17 +21,17 @@ export class RoomComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.cities = [
-      { name: 'New York', code: 'NY' },
-      { name: 'Rome', code: 'RM' },
-      { name: 'London', code: 'LDN' },
-      { name: 'Istanbul', code: 'IST' },
-      { name: 'Paris', code: 'PRS' },
-    ];
+    // this.restaurants = [
+    //   { name: 'New York', code: 'NY' },
+    //   { name: 'Rome', code: 'RM' },
+    //   { name: 'London', code: 'LDN' },
+    //   { name: 'Istanbul', code: 'IST' },
+    //   { name: 'Paris', code: 'PRS' },
+    // ];
 
-    this.formGroup = new FormGroup({
-      selectedCity: new FormControl<City | null>(null),
-    });
+    // this.formGroup = new FormGroup({
+    //   selectedCity: new FormControl<restaurants | null>(null),
+    // });
   }
 
   home() {

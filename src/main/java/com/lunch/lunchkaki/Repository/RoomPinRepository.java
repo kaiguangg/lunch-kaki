@@ -9,7 +9,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RoomPinRepository extends JpaRepository<RoomPin, Integer> {
 
-    @Query(nativeQuery = true, value = "SELECT LUNCH.SEQ_ROOM_ID.NEXTVAL FROM DUAL" )
-    Integer getNextRoomId();
-
 }
