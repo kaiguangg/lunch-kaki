@@ -29,4 +29,11 @@ http://localhost:8080/api/random-restaurant/{roomId} [GET]
 This API returns a random restaurant from the submitted choices.
 
 ## Images
+![home.PNG](https://github.com/kaiguangg/lunch-kaki/blob/main/lunch-kaki-images/home.PNG)
 ![create.PNG](https://github.com/kaiguangg/lunch-kaki/blob/main/lunch-kaki-images/create.PNG)
+![create2.PNG](https://github.com/kaiguangg/lunch-kaki/blob/main/lunch-kaki-images/create2.PNG)
+
+![view1.PNG](https://github.com/kaiguangg/lunch-kaki/blob/main/lunch-kaki-images/view1.PNG)
+![view2.PNG](https://github.com/kaiguangg/lunch-kaki/blob/main/lunch-kaki-images/view2.PNG)
+
+![enter.PNG](https://github.com/kaiguangg/lunch-kaki/blob/main/lunch-kaki-images/view1.PNG)
