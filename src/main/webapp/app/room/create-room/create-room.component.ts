@@ -13,14 +13,23 @@ export class CreateRoomComponent {
 
   newItem: string = '';
   items: string[] = [];
-  
-  constructor(private router: Router, private roomService: RoomService) { }
-  
+  showError = false;
+  errorMessage: string = '';
+
+  constructor(private router: Router, private roomService: RoomService) {}
+
   addItem() {
     if (this.newItem) {
       this.items.push(this.newItem);
       this.newItem = '';
     }
+
+    this.showError = false;
+    this.errorMessage = '';
+  }
+
+  removeItem(index: number) {
+    this.items.splice(index, 1);
   }
 
   validateInput(event: any) {
@@ -40,26 +49,37 @@ export class CreateRoomComponent {
   reset() {
     this.items = [];
     this.newItem = '';
+    this.showError = false;
+    this.errorMessage = '';
   }
 
   submit() {
-    // const payload = this.items;
+    if (this.items.length === 0) {
+      this.showError = true;
+      this.errorMessage = 'Please add a restaurant name.';
+    }
 
-    const payload: CreateRoom = {
-      restaurants: this.items
-    };
-    
-    this.roomService.postRestaurants(payload).subscribe(res => {
-      const roomId = res.body;
-      console.log('Server Response: ', res.body);
-      this.close.emit();
-      this.router.navigate([`/room/${roomId}`], { state: { roomId: roomId } });
-    }, error => {
-      console.error('Server Error: ', error);
-    });
-    
-    // this.router.navigate(['/room/1']);
-    // this.router.navigate(['/some-route'], { state: { roomId: '1234' } });
+    if (this.items.length > 0) {
+      const payload: CreateRoom = {
+        restaurants: this.items,
+      };
+
+      this.roomService.postRestaurants(payload).subscribe({
+        next: (res) => {
+          const roomId = res.body;
+          console.log('Server Response: ', res.body);
+          this.close.emit();
+          this.router.navigate([`/room/${roomId}`], {
+            state: { roomId: roomId },
+          });
+        },
+        error: (error) => {
+          this.showError = true;
+          this.errorMessage = error.error;
+        },
+        complete: () => {},
+      });
+    }
   }
 
   closeDialog() {

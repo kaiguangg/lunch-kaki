@@ -5,28 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
+    <!-- Top section -->
     <div class="container-fluid bg-dark">
-      <h1 class="text-white fs-1">Share this PIN : 123456</h1>
+      <h1 class="text-white fs-1">Share this PIN : {{ roomId }}</h1>
     </div>
 
-    <!-- <ul class="list-group">
-      <li class="list-group-item" *ngFor="let item of items">
-        {{ item }}
-      </li>
-    </ul> -->
-
-    <!-- <div class="card flex justify-content-center">
-        <form [formGroup]="formGroup">
-            <p-listbox [options]="cities" formControlName="selectedCity" optionLabel="name" [style]="{ width: '15rem' }"></p-listbox>
-        </form>
-    </div> -->
-
+    <!-- Restaurants -->
     <div class="container-lg">
       <div
-        class="list-group list-group-checkable d-grid gap-2 border-0 w-auto"
+        class="list-group list-group-checkable d-grid gap-2 border-0 w-auto p-1"
         *ngFor="let restaurant of restaurants?.restaurants"
       >
-        <!-- <input class="list-group-item-check pe-none" type="radio" name="listGroupCheckableRadios" id="listGroupCheckableRadios1" value="" checked=""> -->
         <label
           class="list-group-item rounded-3 py-3"
           for="listGroupCheckableRadios1"
@@ -34,17 +23,18 @@
           {{ restaurant }}
         </label>
       </div>
+
+      <div class="pt-3" *ngFor="let alert of alerts">
+        <alert
+          [type]="alert.type"
+          [dismissOnTimeout]="alert.timeout"
+          (onClosed)="onClosed(alert)"
+          >{{ alert.msg }}</alert
+        >
+      </div>
     </div>
 
-    <div class="container-lg" *ngFor="let alert of alerts">
-      <alert
-        [type]="alert.type"
-        [dismissOnTimeout]="alert.timeout"
-        (onClosed)="onClosed(alert)"
-        >{{ alert.msg }}</alert
-      >
-    </div>
-
+    <!-- Buttons -->
     <div class="container-lg justify-content-center">
       <button
         type="button"
@@ -54,22 +44,13 @@
       >
         Home
       </button>
-      <button type="button" class="btn btn-primary" (click)="getRandomRestaurant()">
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="getRandomRestaurant()"
+      >
         Pick a restaurant randomly!
       </button>
     </div>
-<!-- 
-    <p>If you missed alert under me, just press <code>Add more</code> button</p>
-    <div *ngFor="let alert of alerts">
-      <alert
-        [type]="alert.type"
-        [dismissOnTimeout]="alert.timeout"
-        (onClosed)="onClosed(alert)"
-        >{{ alert.msg }}</alert
-      >
-    </div>
-    <button type="button" class="btn btn-primary" (click)="add()">
-      Add more
-    </button> -->
   </body>
 </html>
