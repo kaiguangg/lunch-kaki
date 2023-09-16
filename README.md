@@ -2,11 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
 
-Technologies Used
-Back-end: Spring Boot
-Database: Oracle
-Java Version: 17
-Front-end: Angular
+Front-end | Angular
+Back-end  | Spring Boot
+Database  | Oracle
+Java Version  | 17
 
 ## Installation
 Run `mvn install`
