@@ -36,4 +36,4 @@ This API returns a random restaurant from the submitted choices.
 ![view1.PNG](https://github.com/kaiguangg/lunch-kaki/blob/main/lunch-kaki-images/view1.PNG)
 ![view2.PNG](https://github.com/kaiguangg/lunch-kaki/blob/main/lunch-kaki-images/view2.PNG)
 
-![enter.PNG](https://github.com/kaiguangg/lunch-kaki/blob/main/lunch-kaki-images/view1.PNG)
+![enter.PNG](https://github.com/kaiguangg/lunch-kaki/blob/main/lunch-kaki-images/enter.PNG)
