@@ -2,7 +2,9 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
 
-Front-end | Angular
+Technologies Used  | :
+------------- | -------------
+Front-end  | Angular
 Back-end  | Spring Boot
 Database  | Oracle
 Java Version  | 17
