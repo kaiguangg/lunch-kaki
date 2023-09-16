@@ -27,3 +27,6 @@ This API allows a user to input a room PIN, which will display and retrieve his 
 
 http://localhost:8080/api/random-restaurant/{roomId} [GET]
 This API returns a random restaurant from the submitted choices.
+
+## Images
+![create.PNG](https://github.com/kaiguangg/lunch-kaki/blob/main/lunch-kaki-images/create.PNG)
