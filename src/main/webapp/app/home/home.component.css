@@ -1,0 +1,11 @@
+body {
+  min-height: 100vh;
+}
+
+input {
+  text-align: center;
+}
+
+::placeholder {
+  text-align: center;
+}
