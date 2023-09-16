@@ -11,27 +11,34 @@ import { RoomService } from './room.service';
   styleUrls: ['./room.component.css'],
 })
 export class RoomComponent implements OnInit {
-  restaurants!: Restaurants[];
   alerts: any[] = [{}];
   formGroup!: FormGroup;
+  roomId!: number;
+  restaurants?: Restaurants;
 
-  constructor(
-    private router: Router,
-    private roomService: RoomService
-  ) {}
+  constructor(private router: Router, private roomService: RoomService) {
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation?.extras.state as { roomId: number };
+
+    if (state) {
+      this.roomId = state.roomId;
+      console.log("state" + state.roomId); // Should log '1234' or whatever you passed as roomId
+    }
+  }
 
   ngOnInit() {
-    // this.restaurants = [
-    //   { name: 'New York', code: 'NY' },
-    //   { name: 'Rome', code: 'RM' },
-    //   { name: 'London', code: 'LDN' },
-    //   { name: 'Istanbul', code: 'IST' },
-    //   { name: 'Paris', code: 'PRS' },
-    // ];
+    console.log("onInit" + this.roomId);
 
-    // this.formGroup = new FormGroup({
-    //   selectedCity: new FormControl<restaurants | null>(null),
-    // });
+    this.roomService.getAllRestaurants(this.roomId).subscribe(res => {
+      
+      if (res.body) {
+        this.restaurants = res.body;
+      }
+      console.log('Room component Server Response: ', this.restaurants);
+    }, error => {
+      console.error('Server Error: ', error);
+    });
+
   }
 
   home() {

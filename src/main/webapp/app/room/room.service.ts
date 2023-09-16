@@ -12,15 +12,15 @@ export class RoomService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getRandomRestaurant(roomId: string): Observable<any> {
+  getRandomRestaurant(roomId: number): Observable<any> {
     return this.httpClient.get(this.getRandomRestaurantAPI, { observe:'response', responseType:'text' });
   }
 
-  getAllRestaurants(roomId: string): Observable<any> {
-    return this.httpClient.get(this.roomAPI, { observe:'response', responseType:'text' });
+  getAllRestaurants(roomId: number): Observable<any> {
+    return this.httpClient.get(`${this.roomAPI}/${roomId}`, { observe:'response', responseType:'json' });
   }
 
   postRestaurants(restaurants: CreateRoom): Observable<any> {
-    return this.httpClient.post(this.roomAPI, restaurants);
+    return this.httpClient.post(this.roomAPI, restaurants, { observe:'response', responseType:'text' });
   }
 }

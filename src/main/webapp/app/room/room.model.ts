@@ -1,6 +1,6 @@
 export interface Restaurants {
     roomId: number,
-    name?: string[],
+    restaurants?: string[],
 }
 
 export interface CreateRoom {

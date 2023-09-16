@@ -30,12 +30,21 @@ public class RestaurantService {
       return new ResponseEntity<>("Room PIN is invalid.", HttpStatus.BAD_REQUEST);
     }
 
-    Optional<Restaurants> restaurantsList = restaurantRepository.findById(roomId);
-    if (restaurantsList.isEmpty() || !restaurantsList.isPresent()) {
-      return new ResponseEntity<>("Room PIN is invalid.", HttpStatus.BAD_REQUEST);
+    List<Restaurants> restaurantsList = restaurantRepository.getAllRestaurants(roomId);
+    if (Objects.isNull(restaurantsList)) {
+      return new ResponseEntity<>("Please create a new room.", HttpStatus.BAD_REQUEST);
     }
 
-    return new ResponseEntity<>(restaurantsList, HttpStatus.OK);
+    List<String> restaurants = new ArrayList<>();
+    for (Restaurants r : restaurantsList) {
+      restaurants.add(r.getName());
+    }
+
+    RestaurantsDTO response = new RestaurantsDTO();
+    response.setRoomId(roomId);
+    response.setRestaurants(restaurants);
+
+    return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
   public ResponseEntity<Object> saveRestaurant(RestaurantsDTO restaurantsDTO) {
@@ -61,7 +70,7 @@ public class RestaurantService {
 
     restaurantRepository.saveAll(restaurantsList);
 
-    return new ResponseEntity<>(roomPin, HttpStatus.CREATED);
+    return new ResponseEntity<>(roomPin.getId(), HttpStatus.CREATED);
   }
 
   public ResponseEntity<String> getRandomRestaurant(Integer roomId) {

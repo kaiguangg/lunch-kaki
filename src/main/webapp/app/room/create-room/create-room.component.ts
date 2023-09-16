@@ -50,9 +50,10 @@ export class CreateRoomComponent {
     };
     
     this.roomService.postRestaurants(payload).subscribe(res => {
+      const roomId = res.body;
       console.log('Server Response: ', res.body);
       this.close.emit();
-      this.router.navigate(['/room/1'], { state: { roomId: '1234' } });
+      this.router.navigate([`/room/${roomId}`], { state: { roomId: roomId } });
     }, error => {
       console.error('Server Error: ', error);
     });

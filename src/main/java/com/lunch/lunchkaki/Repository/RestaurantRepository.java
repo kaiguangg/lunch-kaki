@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface RestaurantRepository extends JpaRepository<Restaurants, Integer> {
 
-  @Query(nativeQuery = true, value = "SELECT ROOM_ID, NAME FROM LUNCH.RESTAURANTS WHERE ROOM_ID = :roomId" )
+  @Query(nativeQuery = true, value = "SELECT ROOM_ID, NAME, CREATED_DATE FROM LUNCH.RESTAURANTS WHERE ROOM_ID = :roomId" )
   List<Restaurants> getAllRestaurants(@Param("roomId") Integer roomId);
 
 }
