@@ -1,4 +1,4 @@
-package dto;
+package com.app.lunchkaki.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

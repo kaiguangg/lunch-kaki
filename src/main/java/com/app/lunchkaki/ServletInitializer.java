@@ -1,4 +1,4 @@
-package com.lunch.lunchkaki;
+package com.app.lunchkaki;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

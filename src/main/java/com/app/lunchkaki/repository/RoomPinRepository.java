@@ -1,9 +1,8 @@
-package com.lunch.lunchkaki.Repository;
+package com.app.lunchkaki.repository;
 
 
-import com.lunch.lunchkaki.Domain.RoomPin;
+import com.app.lunchkaki.domain.RoomPin;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository

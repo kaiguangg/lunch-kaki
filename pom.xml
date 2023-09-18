@@ -8,7 +8,7 @@
 		<version>3.1.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.lunch</groupId>
+	<groupId>com.app</groupId>
 	<artifactId>lunch-kaki</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>

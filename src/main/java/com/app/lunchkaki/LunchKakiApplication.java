@@ -1,4 +1,4 @@
-package com.lunch.lunchkaki;
+package com.app.lunchkaki;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

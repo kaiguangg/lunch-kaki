@@ -1,10 +1,10 @@
-package com.lunch.lunchkaki.Service;
+package com.app.lunchkaki.Service;
 
-import com.lunch.lunchkaki.Domain.Restaurants;
-import com.lunch.lunchkaki.Domain.RoomPin;
-import com.lunch.lunchkaki.Repository.RestaurantRepository;
-import com.lunch.lunchkaki.Repository.RoomPinRepository;
-import dto.RestaurantsDTO;
+import com.app.lunchkaki.domain.Restaurants;
+import com.app.lunchkaki.domain.RoomPin;
+import com.app.lunchkaki.repository.RoomPinRepository;
+import com.app.lunchkaki.repository.RestaurantRepository;
+import com.app.lunchkaki.dto.RestaurantsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,7 +47,7 @@ public class RestaurantService {
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
-  public ResponseEntity<Object> saveRestaurant(RestaurantsDTO restaurantsDTO) {
+  public ResponseEntity<Object> createRoom(RestaurantsDTO restaurantsDTO) {
     if (restaurantsDTO.getRestaurants().isEmpty()) {
       return new ResponseEntity<>("Restaurant name is empty.", HttpStatus.BAD_REQUEST);
     }

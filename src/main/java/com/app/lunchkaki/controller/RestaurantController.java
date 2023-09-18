@@ -1,7 +1,7 @@
-package com.lunch.lunchkaki.Controller;
+package com.app.lunchkaki.controller;
 
-import com.lunch.lunchkaki.Service.RestaurantService;
-import dto.RestaurantsDTO;
+import com.app.lunchkaki.Service.RestaurantService;
+import com.app.lunchkaki.dto.RestaurantsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api")
-public class RoomController {
+public class RestaurantController {
     @Autowired
     private RestaurantService restaurantService;
 
@@ -22,7 +22,7 @@ public class RoomController {
 
     @PostMapping(value = "/room")
     public ResponseEntity<Object> createRoom(@RequestBody RestaurantsDTO restaurantsDTO) {
-        return restaurantService.saveRestaurant(restaurantsDTO);
+        return restaurantService.createRoom(restaurantsDTO);
     }
 
   @GetMapping(value = "/random-restaurant/{roomId}")

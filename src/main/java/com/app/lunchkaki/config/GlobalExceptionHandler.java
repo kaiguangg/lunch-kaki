@@ -1,4 +1,4 @@
-package config;
+package com.app.lunchkaki.config;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

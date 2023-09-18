@@ -1,7 +1,7 @@
-package com.lunch.lunchkaki.Repository;
+package com.app.lunchkaki.repository;
 
 
-import com.lunch.lunchkaki.Domain.Restaurants;
+import com.app.lunchkaki.domain.Restaurants;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

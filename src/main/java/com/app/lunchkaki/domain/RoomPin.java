@@ -1,4 +1,4 @@
-package com.lunch.lunchkaki.Domain;
+package com.app.lunchkaki.domain;
 
 import jakarta.persistence.*;
 
